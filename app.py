@@ -1,8 +1,29 @@
 import streamlit as st
 import random
 import pandas as pd
+import gspread
+from google.oauth2.service_account import Credentials
 from datetime import datetime
 from pathlib import Path
+
+
+#sobre la google sheets
+def guardar_en_sheets(registro):
+    scopes = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+
+    creds = Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=scopes
+    )
+
+    client = gspread.authorize(creds)
+
+    sheet = client.open("Resultados_fracciones_4").sheet1
+    sheet.append_row(list(registro.values()))
+
 
 # =========================
 # CONFIGURACIÓN GENERAL
@@ -150,11 +171,7 @@ else:
     else:
         df.to_csv(archivo, index=False, encoding="utf-8")
 
-    st.download_button(
-        "📥 Descargar resultados (Excel)",
-        df.to_csv(index=False).encode("utf-8"),
-        file_name="resultados_fracciones_pizza.csv",
-        mime="text/csv"
-    )
 
-    st.info("En el archivo queda **una sola fila por alumno**.")
+guardar_en_sheets(registro_final)
+
+st.success("📊 Tu resultado fue enviado a tu maestra")
