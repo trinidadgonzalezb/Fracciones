@@ -154,12 +154,12 @@ else:
 
     # ---- REGISTRO ÚNICO POR ALUMNO ----
     registro_final = {
-        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "nombre": nombre_alumno,
-        "grupo": grupo,
-        "numero_lista": no_de_lista,
-        "aciertos": aciertos,
-        "total_ejercicios": total_ejercicios
+        "Fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "Nombre": nombre_alumno,
+        "Grupo": grupo,
+        "Numero_lista": no_de_lista,
+        "Aciertos": aciertos,
+        "Total_ejercicios": total_ejercicios
     }
 
     df = pd.DataFrame([registro_final])
