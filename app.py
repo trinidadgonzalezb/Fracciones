@@ -170,8 +170,6 @@ else:
         df.to_csv(archivo, mode="a", header=False, index=False, encoding="utf-8")
     else:
         df.to_csv(archivo, index=False, encoding="utf-8")
-
-
-guardar_en_sheets(registro_final)
+        guardar_en_sheets(registro_final)
 
 st.success("📊 Tu resultado fue enviado a tu maestra")
